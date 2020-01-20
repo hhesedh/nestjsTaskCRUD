@@ -35,18 +35,18 @@ export class TasksController {
     return this.tasksService.getTaskById(id);
   }
 
-  /*
   @Post()
   @UsePipes(ValidationPipe)
-  createTask(@Body() createTaskDto: CreateTaskDto): Task {
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return this.tasksService.createTask(createTaskDto);
   }
 
   @Delete('/:id')
-  deleteTask(@Param('id') id: string) {
-    this.tasksService.deleteTask(id);
+  async deleteTask(@Param('id', ParseIntPipe) id: number) {
+    await this.tasksService.deleteTask(id);
   }
 
+  /*
   @Patch('/:id/status')
   updateTaskStatus(
     @Param('id') id: string,
